@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId  # Import ObjectId from bson
@@ -5,7 +6,8 @@ from bson.objectid import ObjectId  # Import ObjectId from bson
 app = Flask(__name__)
 
 # Make sure MongoDB URI is correctly set
-app.config["MONGO_URI"] = "mongodb://localhost:27017/bookstore"  # Replace if your URI is different
+import os
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 
 # Helper function to serialize MongoDB objects
