@@ -1,14 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
+from bson.objectid import ObjectId  # Import ObjectId from bson
 
 app = Flask(__name__)
-app.config["MONGO_URI"] ="mongodb+srv://parvsikka36:6Pilot#6@cluster0.yhzugep.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+
+# Make sure MongoDB URI is correctly set
+app.config["MONGO_URI"] = "mongodb://localhost:27017/bookstore"  # Replace if your URI is different
 mongo = PyMongo(app)
 
 # Helper function to serialize MongoDB objects
 def serialize_doc(doc):
-    doc["_id"] = str(doc["_id"])
+    doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
     return doc
 
 @app.route('/')
@@ -38,7 +40,6 @@ def get_book(book_id):
     else:
         return jsonify({'error': 'Book not found'}), 404
 
-
 @app.route('/books/<book_id>', methods=['DELETE'])
 def delete_book(book_id):
     result = mongo.db.books.delete_one({'_id': ObjectId(book_id)})
@@ -48,4 +49,4 @@ def delete_book(book_id):
         return jsonify({'error': 'Book not found'}), 404
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5007)
+    app.run(debug=True, port=5009)
