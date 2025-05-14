@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 
 # Get MongoDB URI from environment variables
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["MONGO_URI"] = "mongodb+srv://parvsikka36:6Pilot#6@cluster0.yhzugep.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 # Initialize MongoDB connection
 mongo = PyMongo(app)
