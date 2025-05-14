@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/bookstore"  # Replace if your URI is different
+app.config["MONGO_URI"] ="mongodb+srv://parvsikka36:6Pilot#6@cluster0.yhzugep.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 mongo = PyMongo(app)
 
 # Helper function to serialize MongoDB objects
