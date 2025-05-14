@@ -1,10 +1,12 @@
+import os
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://parvsikka36:6Pilot#6@cluster0.yhzugep.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-mongo = PyMongo(app)
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+
+mongo = PyMongo()  # Initialize without the app initially
 
 # Helper function to serialize MongoDB objects
 def serialize_doc(doc):
@@ -57,4 +59,5 @@ def delete_book(book_id):
         return jsonify({'error': 'Book not found'}), 404
 
 if __name__ == '__main__':
+    mongo.init_app(app)  # Initialize the app here
     app.run(debug=True, port=5007)
